@@ -6,19 +6,19 @@
     <title>Dats Difference Calculator</title>
     <style>
         body{
-            background: #c0392b;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #8e44ad, #c0392b);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #8e44ad, #c0392b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: #c0392b; 
+            background: -webkit-linear-gradient(to right, #8e44ad, #c0392b); 
+            background: linear-gradient(to right, #8e44ad, #c0392b);
         }
         .container{
-            background: #E8CBC0;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #636FA4, #E8CBC0);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #636FA4, #E8CBC0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: #E8CBC0;  
+            background: -webkit-linear-gradient(to right, #636FA4, #E8CBC0); 
+            background: linear-gradient(to right, #636FA4, #E8CBC0); 
             height: auto;
             width: 330px;
             box-shadow: 5px 5px 10px 10px rgb(60, 51, 51);
             border-radius: 13px;
-            margin: 200px auto;
+            margin: 180px auto;
             padding: 10px;
         }
 
@@ -42,6 +42,31 @@
             border-radius: 5px;
         }
 
+        .diff-date{
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            margin-top: 20px;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .cal_btn{
+            font-size: 20px;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            display: block;
+            margin: 30px auto;
+            border: 2px solid black;
+            border-radius: 20px;
+            background-color: white;
+            padding: 8px 10px;
+        }
+
+        .cal_btn:hover{
+            background-color: black;
+            color: white;
+            border: 2px solid white;
+        }
+        
     </style>
 </head>
 <body>
@@ -50,20 +75,44 @@
         <h1 class="heading">Date Difference Calculator</h1>
 
         <form class="date-form">
-            <label class="lable" for="date1">Date 1:</label>
+            <b><label class="lable" for="date1">Date 1:</label></b>
             <input type="date" id="date1" class="date-1" name="date1" required/>
             <br><br>
 
-            <label class="lable" for="date2">Date 2:</label>
+            <b><label class="lable" for="date2">Date 2:</label></b>
             <input type="date" id="date2" class="date-1" name="date2" required/>
             <br><br>  
-
-            <div class="btn-container">
-                <button type="button" class="btn" onclick="reset()">Reset</button>
-                <button type="button" class="btn" onclick="cal()">Calculate</button>
-            </div>
         </form>
+
+        <div id="diff-date" class="diff-date">
+            Difference Between Two Dates :
+        </div>
+
+        <button type="button" class="cal_btn" onclick="calDifference()">
+            Calculate
+        </button>
+
+        <div id="result"></div>
     </div>
-    
+
+    <script>
+        function calDifference(){
+            const currentDateInput= document.getElementById('date1').value;
+            const currentDate= new Date(currentDateInput);
+            const oldDateInput= document.getElementById('date2').value;
+            const oldDate= new Date(oldDateInput);
+            const difference= document.getElementById('diff-date');
+ 
+            let dateDiff= currentDate.getFullYear() - oldDate.getFullYear();
+            let monthDiff= currentDate.getMonth() - oldDate.getMonth();
+
+            if(monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < oldDate.getDate()))
+            {
+                dateDiff--;
+            }
+
+            difference.innerText= `Difference between Two Dates: ${dateDiff}`;
+        }
+    </script>
 </body>
 </html>
